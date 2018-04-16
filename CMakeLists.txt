@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 project(fractol_C)
 
-set(CMAKE_CXX_STANDARD 11)
-
-
 set(CMAKE_C_STANDARD 99)
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -25,7 +22,7 @@ add_executable(fractol_C ${SOURCE_FILES})
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries(fractol_C -lft -lm)
-    target_link_libraries(fractolc_C -lft -lmlx -lm)
+    target_link_libraries(fractol_C -lft -lmlx -lm)
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")

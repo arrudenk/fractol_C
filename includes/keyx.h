@@ -4,7 +4,6 @@
 
 #ifndef FRACTOL_C_KEYX_H
 # define FRACTOL_C_KEYX_H
-# define FD_F_KEYS_H
 # define UP 126
 # define DOWN 125
 # define RIGHT 124

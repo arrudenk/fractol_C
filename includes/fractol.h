@@ -48,19 +48,19 @@ typedef	struct	s_mlx
 typedef struct	s_fractal
 {
 	t_mlx		*mlx;
-	double		not_real;
+	double		imaginary;
 	double		real;
 	int			iterator;
 	int			max_iterations;
 	double		zoom;
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 	double		x_move;
 	double		y_move;
-
 }				t_fractal;
 
 t_image		*new_image(t_mlx *mlx);
+t_image		*create_new_im(void *mlx);
 void		clear_image(t_mlx *mlx);
 void		image_set_pixel(t_mlx *mlx, int x, int y, int c);
 t_mlx		*init_mlx(void);

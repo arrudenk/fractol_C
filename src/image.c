@@ -46,3 +46,14 @@ t_image	*new_image(t_mlx *mlx)
 	img->bpp = (img->bpp) >> 3;
 	return (img);
 }
+
+t_image	*create_new_im(void *mlx)
+{
+	t_image *im;
+
+	im = (t_image *)malloc(sizeof(t_image));
+	im->image = mlx_new_image(mlx, W, H);
+	im->ptr = mlx_get_data_addr(im->image, &im->bpp, &im->stride, &im->endian);
+	im->bpp /= 8;
+	return (im);
+}

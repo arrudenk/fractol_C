@@ -15,8 +15,8 @@
 # define FRACTOL_C_H
 # include "mlx.h"
 # include "libft.h"
-# define W 420
-# define H 420
+# define W 1200
+# define H 1200
 
 typedef struct	s_vec4
 {
@@ -55,6 +55,9 @@ typedef struct	s_fractal
 	double		zoom;
 	double		x;
 	double		y;
+	char		color;
+	char		color1;
+	char		color2;
 	double		x_move;
 	double		y_move;
 }				t_fractal;

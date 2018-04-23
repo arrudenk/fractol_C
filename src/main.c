@@ -31,9 +31,9 @@ void		pixel_to_image(t_fractal *fractal)
 {
 	int j;
 	j = 4 * (fractal->y * W + fractal->x);
-	fractal->mlx->img->ptr[j] = (char)255;
-	fractal->mlx->img->ptr[j + 1] = (char)0;
-	fractal->mlx->img->ptr[j + 2] = (char)255;
+	fractal->mlx->img->ptr[j] = 42 * fractal->iterator / 42;
+	fractal->mlx->img->ptr[j + 1] = 42 * 42 * fractal->iterator / 42;
+	fractal->mlx->img->ptr[j + 2] = 42 * 42 * 42 * fractal->iterator / 42;
 }
 
 void		mandelbrod_part2(t_fractal *fractal)
@@ -50,10 +50,10 @@ void		mandelbrod_part2(t_fractal *fractal)
 	while (x_t * x_t + y_t * y_t <= 4 && fractal->iterator < fractal->max_iterations)
 	{
 		tem = x_t * x_t - y_t * y_t + fractal->real;
-		y_t = 2 * x_t * y_t + fractal->imaginary;
-		x_t = tem;
-//		image_set_pixel(fractal->mlx, (int)y_t, (int)x_t, 0xffffff);
-		printf("%f %f \n", y_t, x_t);
+
+		y_t = 2 * y_t * x_t + fractal->imaginary;
+		x_t = tem; // x_t * x_t - y_t * y_t + fractal->real;
+//		printf("%f %f \n", y_t, x_t);
 		fractal->iterator++;
 	}
 	if (fractal->iterator < fractal->max_iterations)
@@ -64,11 +64,11 @@ void		mandelbrod_part2(t_fractal *fractal)
 void		mandelbrod_part1(t_fractal *fractal)
 {
 	fractal->y = 0;
-	while (fractal->x < fractal->mlx->h)
+	while (fractal->y < fractal->mlx->h)
 	{
 		fractal->x = 0;
 		fractal->imaginary = (fractal->y - H / 2) / (0.25 * fractal->zoom * H) + fractal->y_move;
-		while (fractal->x < fractal->mlx->w)
+		while (fractal->x < fractal->mlx->h)
 		{
 			mandelbrod_part2(fractal);
 			fractal->x++;
@@ -84,13 +84,21 @@ int			hook_keydown(int key, t_fractal *fractal)
 	if (key == ESC)
 		exit(123);
 	if (key == LEFT || key == RIGHT)
+	{
 		;
+	}
 	if (key == Q || key == E)
+	{
 		;
+	}
 	if (key == UP || key == DOWN)
+	{
 		;
+	}
 	if (key == MINUS || key == PLUS)
+	{
 		;
+	}
 	if (key == MAC_RANDOM)
 	{
 		;
@@ -105,9 +113,9 @@ t_fractal	*fractal_info(void)
 	fractal = ft_memalloc(sizeof(t_fractal));
 	fractal->mlx = init_mlx();
 	fractal->iterator = 0;
-	fractal->max_iterations = 10;
+	fractal->max_iterations = 130;
 	fractal->zoom = 1;
-	fractal->x_move = 0;
+	fractal->x_move = -0.5;
 	fractal->y_move = 0;
 	return (fractal);
 }

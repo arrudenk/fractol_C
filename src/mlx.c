@@ -19,8 +19,8 @@ t_mlx	*init_mlx(void)
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, W, H, "Hello MLX");
-	mlx->img = create_new_im(mlx);
-	mlx->h = 420;
-	mlx->w = 420;
+	mlx->img = new_image(mlx);
+	mlx->h = 1200;
+	mlx->w = 1200;
 	return (mlx);
 }

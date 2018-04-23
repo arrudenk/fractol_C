@@ -15,17 +15,11 @@
 # define FRACTOL_C_H
 # include "mlx.h"
 # include "libft.h"
-# define W 1200
-# define H 1200
+# include "math.h"
+# include "OpenCL/opencl.h"
 
-typedef struct	s_vec4
-{
-	double	x;
-	double	y;
-	double	z;
-	double	w;
-	double	f;
-}				t_vec4;
+# define W 640
+# define H 640
 
 typedef struct	s_image
 {
@@ -55,9 +49,6 @@ typedef struct	s_fractal
 	double		zoom;
 	double		x;
 	double		y;
-	char		color;
-	char		color1;
-	char		color2;
 	double		x_move;
 	double		y_move;
 }				t_fractal;
@@ -67,8 +58,8 @@ t_image		*create_new_im(void *mlx);
 void		clear_image(t_mlx *mlx);
 void		image_set_pixel(t_mlx *mlx, int x, int y, int c);
 t_mlx		*init_mlx(void);
-
-t_vec4		vec4(double x, double y, double z, double w, double f);
+void		pixel_to_image(t_fractal *fractal);
+void		mandelbrod_part1(t_fractal *fractal);
 
 
 #endif

@@ -22,22 +22,22 @@ static void		mandelbrod_part2(t_fractal *fractal)
 					(0.25 * fractal->zoom * fractal->mlx->w) + fractal->x_move;
 	x_t = 0;
 	y_t = 0;
-	fractal->iterator = 0;
-	while (x_t * x_t + y_t * y_t <= 4 && fractal->iterator < fractal->max_iterations)
+	fractal->thing = 0;
+	while (x_t * x_t + y_t * y_t <= 4 && fractal->thing < fractal->maximum)
 	{
 		tem = x_t * x_t - y_t * y_t + fractal->real;
 
 		y_t = 2 * y_t * x_t + fractal->imaginary;
 		x_t = tem; // x_t * x_t - y_t * y_t + fractal->real;
 //		printf("%f %f \n", y_t, x_t);
-		fractal->iterator++;
+		fractal->thing++;
 	}
-	if (fractal->iterator < fractal->max_iterations)
+	if (fractal->thing < fractal->maximum)
 		pixel_to_image(fractal);
 
 }
 
-void		mandelbrod_part1(t_fractal *fractal)
+static void		mandelbrod_set(t_fractal *fractal)
 {
 	fractal->y = 0;
 	while (fractal->y < fractal->mlx->h)
@@ -51,5 +51,13 @@ void		mandelbrod_part1(t_fractal *fractal)
 		}
 		fractal->y++;
 	}
+//	mlx_put_image_to_window(fractal->mlx->mlx, fractal->mlx->win, fractal->mlx->img->image, 0, 0);
+}
+
+void		mandelbrod(t_fractal *fractal)
+{
+	mandelbrod_set(fractal);
+	mlx_hook(fractal->mlx->win, 2, 5, hook_keydown, fractal);
+	mlx_hook(fractal->mlx->win, 17, 1L << 17, exit_x, fractal->mlx->mlx);
 	mlx_put_image_to_window(fractal->mlx->mlx, fractal->mlx->win, fractal->mlx->img->image, 0, 0);
 }

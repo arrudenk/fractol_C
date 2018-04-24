@@ -27,13 +27,13 @@ void	clear_image(t_mlx *mlx)
 	*(mlx->img->ptr) = 0;
 }
 
-void		pixel_to_image(t_fractal *fractal)
+void	pixel_to_image(t_fractal *fractal)
 {
 	int j;
 	j = 4 * ((int)fractal->y * W + (int)fractal->x);
-	fractal->mlx->img->ptr[j] = fractal->iterator * 3; //(char)32 * (char)fractal->iterator;
-	fractal->mlx->img->ptr[j + 1] = fractal->iterator * 5; //(char)8 * (char)fractal->iterator;
-	fractal->mlx->img->ptr[j + 2] = fractal->iterator * 9; //(char)25 * (char)fractal->iterator;
+	fractal->mlx->img->ptr[j] = (char)32 * (char)fractal->thing;
+	fractal->mlx->img->ptr[j + 1] = (char)8 * (char)fractal->thing;
+	fractal->mlx->img->ptr[j + 2] = (char)25 * (char)fractal->thing;
 }
 
 t_image	*new_image(t_mlx *mlx)

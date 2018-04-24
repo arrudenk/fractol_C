@@ -22,49 +22,9 @@ int			exit_x(void)
 void		update(t_fractal *fractal)
 {
 	clear_image(fractal->mlx);
-	mandelbrod_part1(fractal);
+	do_fractal(fractal);
 }
 
-int			hook_keydown(int key, t_fractal *fractal)
-{
-	static double zoomer = 0.5;
-	if (key == ESC)
-		exit(123);
-	if (key == LEFT || key == RIGHT)
-	{
-		if (key == LEFT)
-			fractal->x_move += 0.002;
-		else
-			fractal->x_move -= 0.002;
-	}
-	if (key == Q || key == E)
-	{
-		;
-	}
-	if (key == UP || key == DOWN)
-	{
-		if (key == UP)
-			fractal->y_move += 0.02;
-		else
-			fractal->y_move -= 0.02;
-	}
-	if (key == MINUS || key == PLUS)
-	{
-		if (key == PLUS)
-			fractal->zoom += 1.2;
-		else if(fractal->zoom >= 2.2)
-			fractal->zoom += -1.2;
-	}
-	if (key == MAC_RANDOM)
-	{
-		fractal->x_move = 0;
-		fractal->zoom = 1;
-		fractal->y_move = 0;
-
-	}
-	update(fractal);
-	return (0);
-}
 
 t_fractal	*fractal_info(void)
 {
@@ -72,36 +32,70 @@ t_fractal	*fractal_info(void)
 
 	fractal = ft_memalloc(sizeof(t_fractal));
 	fractal->mlx = init_mlx();
-	fractal->iterator = 0;
-	fractal->max_iterations = 255;
+	fractal->thing = 0;
+	fractal->maximum = 200;
 	fractal->zoom = 1;
 	fractal->x_move = 0;
 	fractal->y_move = 0;
 	return (fractal);
 }
 
+void	do_fractal(t_fractal *fractal)
+{
+	if (fractal->fractal == 1)
+	{
+		mandelbrod(fractal);
+	}
+	else if (fractal->fractal == 2)
+	{
+		julia(fractal);
+	}
+	else if (fractal->fractal == 3)
+		;
+	else if (fractal->fractal == 4)
+		;
+	else if (fractal->fractal == 5)
+		;
+}
+
+void		select_fractal(char *str, t_fractal *fractal)
+{
+	if (str[0] == '-')
+	{
+		if (str[1] == 'm')
+			fractal->fractal = (1);
+		else if (str[1] == 'j')
+			fractal->fractal = (2);
+		else if (str[1] == 'g')
+			fractal->fractal = (3);
+		else if (str[1] == 'p')
+			fractal->fractal = (4);
+		else if (str[1] == 't')
+			fractal->fractal = (5);
+		else if (str[1] == 'k')
+			fractal->fractal = (6);
+		else if (str[1] == 'b')
+			fractal->fractal = (7);
+		else
+			fractal->fractal = 0;
+	}
+	else
+	{
+		fractal->fractal = 0;
+	}
+}
+
 int		main(int argc, char **argv)
 {
-//	if (argc != 2)
-//		return (2);
-	t_fractal	*fractal;
-//	cl_platform_id platform_id = NULL;
-//	cl_device_id device_id = NULL;
-//	cl_uint ret_num_devices;
-//	cl_uint ret_num_platforms;
-//	cl_int ret = clGetPlatformIDs(1, &platform_id, &ret_num_platforms);
-//	ret = clGetDeviceIDs( platform_id, CL_DEVICE_TYPE_DEFAULT, 1,
-//						  &device_id, &ret_num_devices);
-	// Create an OpenCL context
-//	cl_context context = clCreateContext( NULL, 1, &device_id, NULL, NULL, &ret);
-//
-//	// Create a command queue
-//	cl_command_queue command_queue = clCreateCommandQueue(context, device_id, 0, &ret);
+	t_fractal *fractal;
 
 	fractal = fractal_info();
-	mandelbrod_part1(fractal);
-	mlx_hook(fractal->mlx->win, 2, 5, hook_keydown, fractal);
+	if (argc != 2)
+		return (2);
+	select_fractal(argv[1], fractal);
+	do_fractal(fractal);
 	mlx_hook(fractal->mlx->win, 17, 1L << 17, exit_x, fractal->mlx->mlx);
+	mlx_hook(fractal->mlx->win, 2, 5, hook_keydown, fractal);
 	mlx_loop(fractal->mlx->mlx);
 	return (0);
 }

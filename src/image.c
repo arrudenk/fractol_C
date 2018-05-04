@@ -31,9 +31,9 @@ void	pixel_to_image(t_fractal *fractal)
 {
 	int j;
 	j = 4 * ((int)fractal->y * W + (int)fractal->x);
-	fractal->mlx->img->ptr[j] = (char)32 * (char)fractal->thing;
-	fractal->mlx->img->ptr[j + 1] = (char)8 * (char)fractal->thing;
-	fractal->mlx->img->ptr[j + 2] = (char)25 * (char)fractal->thing;
+	fractal->mlx->img->ptr[j] = 32 * fractal->thing;
+	fractal->mlx->img->ptr[j + 1] = 8 * fractal->thing;
+	fractal->mlx->img->ptr[j + 2] = 25 * fractal->thing;
 }
 
 t_image	*new_image(t_mlx *mlx)

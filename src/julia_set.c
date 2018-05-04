@@ -52,7 +52,6 @@ static void		juli_do_the_thing(t_fractal *fractal)
 	while (fractal->y < H)
 	{
 		fractal->x = 0;
-
 		while (fractal->x < W)
 		{
 			julia_pixel(fractal);

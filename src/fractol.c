@@ -11,3 +11,8 @@
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
+
+void		zoomin(t_fractal *set, int x, int y)
+{
+
+}

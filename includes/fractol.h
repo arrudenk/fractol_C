@@ -35,8 +35,6 @@ typedef	struct	s_mlx
 	void		*mlx;
 	void		*win;
 	t_image		*img;
-	double		w;
-	double		h;
 }				t_mlx;
 
 typedef struct	s_fractal
@@ -58,20 +56,25 @@ typedef struct	s_fractal
 int			exit_x(void);
 t_image		*new_image(t_mlx *mlx);
 
-void		mandelbrod(t_fractal *fractal);
-void		julia(t_fractal *fractal);
-
-void		update(t_fractal *fractal);
-int			hook_keydown(int key, t_fractal *fractal);
-
-int			mouse_func(int button, int x, int y, t_fractal *fractal);
-void		do_fractal(t_fractal *fractal);
+//mandatory ->
+void		mandelbrot(t_fractal *set);
+void		julia(t_fractal *set);
+void		celtic(t_fractal *set);
+// <-
+void		update(t_fractal *set);
+//keys
+int			hook_keydown(int key, t_fractal *set);
+//<-
+void		do_fractal(t_fractal *set);
 t_image		*create_new_im(void *mlx);
 void		clear_image(t_mlx *mlx);
 void		image_set_pixel(t_mlx *mlx, int x, int y, int c);
 t_mlx		*init_mlx(void);
-void		pixel_to_image(t_fractal *fractal);
+void		pixel_to_image(t_fractal *set);
 
+//BONUS ->
+int			mouse_func(int button, int x, int y, t_fractal *set);
+void		zoomin(t_fractal *set, int x, int y);
 
 
 #endif

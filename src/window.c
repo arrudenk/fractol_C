@@ -20,7 +20,5 @@ t_mlx	*init_mlx(void)
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, W, H, "F.R.A.C.T.O.L");
 	mlx->img = new_image(mlx);
-	mlx->h = 500;
-	mlx->w = 500;
 	return (mlx);
 }

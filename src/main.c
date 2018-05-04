@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-#include "../includes/keyx.h"
 #include <stdio.h>
 
 int			exit_x(void)
@@ -19,10 +18,10 @@ int			exit_x(void)
 	exit(123);
 }
 
-void		update(t_fractal *fractal)
+void		update(t_fractal *set)
 {
-	clear_image(fractal->mlx);
-	do_fractal(fractal);
+	clear_image(set->mlx);
+	do_fractal(set);
 }
 
 
@@ -40,25 +39,21 @@ t_fractal	*fractal_info(void)
 	return (fractal);
 }
 
-void	do_fractal(t_fractal *fractal)
+void	do_fractal(t_fractal *set)
 {
-	if (fractal->fractal == 1)
-	{
-		mandelbrod(fractal);
-	}
-	else if (fractal->fractal == 2)
-	{
-		julia(fractal);
-	}
-	else if (fractal->fractal == 3)
+	if (set->fractal == 1)
+		mandelbrot(set);
+	else if (set->fractal == 2)
+		julia(set);
+	else if (set->fractal == 3)
+		celtic(set);
+	else if (set->fractal == 4)
 		;
-	else if (fractal->fractal == 4)
-		;
-	else if (fractal->fractal == 5)
+	else if (set->fractal == 5)
 		;
 }
 
-void		select_fractal(char *str, t_fractal *fractal)
+void		select_fractal(const char *str, t_fractal *fractal)
 {
 	if (str[0] == '-')
 	{
@@ -66,7 +61,7 @@ void		select_fractal(char *str, t_fractal *fractal)
 			fractal->fractal = (1);
 		else if (str[1] == 'j')
 			fractal->fractal = (2);
-		else if (str[1] == 'g')
+		else if (str[1] == 'c')
 			fractal->fractal = (3);
 		else if (str[1] == 'p')
 			fractal->fractal = (4);

@@ -15,7 +15,6 @@
 
 int		mouse_func(int button, int x, int y, t_fractal *set)
 {
-	clear_image(set->mlx);
 	if (button == 4)
 	{
 		set->zoom *= 1.1;
@@ -28,13 +27,13 @@ int		mouse_func(int button, int x, int y, t_fractal *set)
 		set->y_move -= (((float)(H / 2) - y) / (H * set->zoom));
 		set->x_move -= (((float)(W / 2) - x) / (W * set->zoom));
 	}
-	do_fractal(set);
-	mlx_put_image_to_window(set->mlx, set->mlx->win, set->mlx->img, 0, 0);
+	update(set);
 	return (0);
 }
 
 int			hook_keydown(int key, t_fractal *set)
 {
+	change_color(set, key);
 	if (key == ESC)
 		exit(123);
 	if (key == LEFT || key == RIGHT)
@@ -46,7 +45,10 @@ int			hook_keydown(int key, t_fractal *set)
 	}
 	if (key == Q || key == E)
 	{
-		set->stop = set->stop == 0 ? 1 : 0;
+		if (set->stop == 0)
+			set->stop = 1;
+		else
+			set->stop = 0;
 	}
 	if (key == UP || key == DOWN)
 	{
@@ -58,36 +60,19 @@ int			hook_keydown(int key, t_fractal *set)
 	if (key == MINUS || key == PLUS)
 	{
 		if (key == PLUS)
-			set->zoom += 1.2;
-		else if(set->zoom >= 2.2)
-			set->zoom += -1.2;
+			set->zoom /= 1.2;
+		else if(set->zoom >= 1.2)
+			set->zoom *= 1.2;
 	}
 	if (key == MAC_RANDOM)
 	{
 		set->x_move = 0;
 		set->zoom = 1;
 		set->y_move = 0;
-
+		set->red = 0;
+		set->green = 0;
+		set->blue = 0;
 	}
 	update(set);
-	return (0);
-}
-
-int		mouse_julia(int x, int y, t_fractal *fractal)
-{
-	clear_image(fractal->mlx);
-	if (fractal->stop == 0)
-	{
-		fractal->real = (x - W / 2)
-						/ (0.25 * fractal->zoom * W) + fractal->x_move;
-		fractal->imaginary = (y - H / 2)
-							 / (0.25 * fractal->zoom * H) + fractal->y_move;
-		fractal->x = x;
-		fractal->x = y;
-	}
-
-	if (fractal->fractal == 2)
-		do_fractal(fractal);
-	mlx_put_image_to_window(fractal->mlx, fractal->mlx->win, fractal->mlx->img, 0, 0);
 	return (0);
 }

@@ -31,9 +31,9 @@ void	pixel_to_image(t_fractal *set)
 {
 	int j;
 	j = 4 * ((int)set->y * W + (int)set->x);
-	set->mlx->img->ptr[j] = 32 * set->thing;
-	set->mlx->img->ptr[j + 1] = 8 * set->thing;
-	set->mlx->img->ptr[j + 2] = 25 * set->thing;
+	set->mlx->img->ptr[j] = set->blue * set->thing;
+	set->mlx->img->ptr[j + 1] = set->green * set->thing;
+	set->mlx->img->ptr[j + 2] = set->red * set->thing;
 }
 
 t_image	*new_image(t_mlx *mlx)

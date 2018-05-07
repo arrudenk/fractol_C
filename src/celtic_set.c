@@ -26,7 +26,6 @@ static void		celtic_part2(t_fractal *fractal)
 	while (x_t * x_t + y_t * y_t <= 4 && fractal->thing < fractal->maximum)
 	{
 		temp = fabs(x_t * x_t - y_t * y_t) + fractal->real;
-
 		y_t = y_t * x_t * 2 + fractal->imaginary;
 		x_t = temp;
 		fractal->thing++;

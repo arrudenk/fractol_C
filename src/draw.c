@@ -11,5 +11,21 @@
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
+#include "../includes/keyx.h"
 
-
+void			change_color(t_fractal *set, int key)
+{
+	if (key == RED)
+		set->red += 10;
+	if (key == GREEN)
+		set->green += 10;
+	if (key == BLUE)
+		set->blue += 10;
+	ft_putstr("red: ");
+	ft_putnbr(set->red);
+	ft_putstr(" green: ");
+	ft_putnbr(set->green);
+	ft_putstr(" blue: ");
+	ft_putnbr(set->blue);
+	ft_putendl("");
+}

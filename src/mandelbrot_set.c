@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../includes/fractol.h"
 
 static void		mandelbrot_part2(t_fractal *set)

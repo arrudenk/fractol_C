@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-#include <stdio.h>
 
 int			exit_x(void)
 {
@@ -27,16 +26,19 @@ void		update(t_fractal *set)
 
 t_fractal	*fractal_info(void)
 {
-	t_fractal	*fractal;
+	t_fractal	*set;
 
-	fractal = ft_memalloc(sizeof(t_fractal));
-	fractal->mlx = init_mlx();
-	fractal->thing = 0;
-	fractal->maximum = 200;
-	fractal->zoom = 1;
-	fractal->x_move = 0;
-	fractal->y_move = 0;
-	return (fractal);
+	set = ft_memalloc(sizeof(t_fractal));
+	set->mlx = init_mlx();
+	set->thing = 0;
+	set->maximum = 200;
+	set->zoom = 1;
+	set->x_move = 0;
+	set->y_move = 0;
+	set->red = 0;
+	set->green = 0;
+	set->blue = 0;
+	return (set);
 }
 
 void	do_fractal(t_fractal *set)
@@ -49,8 +51,14 @@ void	do_fractal(t_fractal *set)
 		celtic(set);
 	else if (set->fractal == 4)
 		;
-	else if (set->fractal == 5)
-		;
+}
+
+void		error(int error)
+{
+	if (error == -1)
+		ft_putendl("Bad argument. Available (-j (<-Julia set)"
+						   ", -m (<-Mandelbrot), -c (<-Celtic))");
+	exit(error);
 }
 
 void		select_fractal(const char *str, t_fractal *fractal)
@@ -63,21 +71,11 @@ void		select_fractal(const char *str, t_fractal *fractal)
 			fractal->fractal = (2);
 		else if (str[1] == 'c')
 			fractal->fractal = (3);
-		else if (str[1] == 'p')
-			fractal->fractal = (4);
-		else if (str[1] == 't')
-			fractal->fractal = (5);
-		else if (str[1] == 'k')
-			fractal->fractal = (6);
-		else if (str[1] == 'b')
-			fractal->fractal = (7);
 		else
-			fractal->fractal = 0;
+			error(-1);
 	}
 	else
-	{
-		fractal->fractal = 0;
-	}
+		error(-1);
 }
 
 int		main(int argc, char **argv)
@@ -86,7 +84,7 @@ int		main(int argc, char **argv)
 
 	fractal = fractal_info();
 	if (argc != 2)
-		return (2);
+		error(-1);
 	select_fractal(argv[1], fractal);
 	do_fractal(fractal);
 	mlx_hook(fractal->mlx->win, 17, 1L << 17, exit_x, fractal->mlx->mlx);

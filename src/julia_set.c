@@ -15,12 +15,15 @@
 static int		mouse_julia(int x, int y, t_fractal *set)
 {
 	clear_image(set->mlx);
-	set->real = (x - W / 2)
-					/ (0.25 * set->zoom * W) + set->x_move;
-	set->imaginary = (y - H / 2)
-						 / (0.25 * set->zoom * H) + set->y_move;
-	set->x = x;
-	set->x = y;
+	if (set->stop == 0)
+	{
+		set->real =
+				(x - W / 2) / (0.25 * set->zoom * W) + set->x_move;
+		set->imaginary =
+				(y - H / 2) / (0.25 * set->zoom * H) + set->y_move;
+		set->x = x;
+		set->x = y;
+	}
 	do_fractal(set);
 	mlx_put_image_to_window(set->mlx, set->mlx->win, set->mlx->img, 0, 0);
 	return (0);

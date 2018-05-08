@@ -54,7 +54,7 @@ void		juli_do_the_thing(t_fractal *set)
 	while (set->y < set->end)
 	{
 		set->x = 0;
-		while (set->x < set->end)
+		while (set->x < W)
 		{
 			julia_pixel(set);
 			set->x++;

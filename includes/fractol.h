@@ -75,6 +75,7 @@ void			celtic(t_fractal *set);
 void			do_fractal(t_fractal *set);
 void			update(t_fractal *set);
 void			mandelbrot_set(t_fractal *set);
+void			celtic_mandelbrot(t_fractal *set);
 
 int				hook_keydown(int key, t_fractal *set);
 /*>>BONUS<<*/

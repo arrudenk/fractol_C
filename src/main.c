@@ -73,7 +73,7 @@ t_fractal	*fractal_info(void)
 	set->y_move = 0;
 	set->red = 42;
 	set->green = 42 + 42;
-	set->blue = 42 + 42 + 42;
+	set->blue = 42 + 42 / 42;
 	set->start = 0;
 	set->end = 0;
 	return (set);
@@ -88,7 +88,6 @@ int		main(int argc, char **argv)
 	if (argc != 2)
 		error(-1);
 	select_fractal(argv[1], fractal);
-//	pthread(fractal);
 	do_fractal(fractal);
 	mlx_hook(fractal->mlx->win, 17, 1L << 17, exit_x, fractal->mlx->mlx);
 	mlx_hook(fractal->mlx->win, 2, 5, hook_keydown, fractal);

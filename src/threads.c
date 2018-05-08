@@ -32,7 +32,7 @@ void		pthread(t_fractal *set)
 		if (set->fractal == 2)
 			pthread_create(&tid[i], NULL, juli_do_the_thing, &c_arr[i]);
 		if (set->fractal == 3)
-			pthread_create(&tid[i], NULL, mandelbrot_set, &c_arr[i]);
+			pthread_create(&tid[i], NULL, celtic_mandelbrot, &c_arr[i]);
 	}
 	while (--i >= 0)
 		pthread_join(tid[i], NULL);

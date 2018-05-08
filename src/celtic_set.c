@@ -34,13 +34,14 @@ static void		celtic_part2(t_fractal *set)
 		pixel_to_image(set);
 }
 
-void		celtic_mandelbrot(t_fractal *set)
+void			celtic_set(t_fractal *set)
 {
 	set->y = set->start;
 	while (set->y < set->end)
 	{
 		set->x = 0;
-		set->imaginary = (set->y - H / 2) / (0.25 * set->zoom * H) + set->y_move;
+		set->imaginary =
+				(set->y - H / 2) / (0.25 * set->zoom * H) + set->y_move;
 		while (set->x < W)
 		{
 			celtic_part2(set);
@@ -50,11 +51,12 @@ void		celtic_mandelbrot(t_fractal *set)
 	}
 }
 
-void		celtic(t_fractal *set)
+void			celtic(t_fractal *set)
 {
 	pthread(set);
 	mlx_hook(set->mlx->win, 2, 5, hook_keydown, set);
 	mlx_mouse_hook(set->mlx->win, mouse_func, set);
 	mlx_hook(set->mlx->win, 17, 1L << 17, exit_x, set->mlx->mlx);
-	mlx_put_image_to_window(set->mlx->mlx, set->mlx->win, set->mlx->img->image, 0, 0);
+	mlx_put_image_to_window(set->mlx->mlx, set->mlx->win
+			, set->mlx->img->image, 0, 0);
 }

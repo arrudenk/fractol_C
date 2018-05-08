@@ -34,23 +34,23 @@ int				mouse_func(int button, int x, int y, t_fractal *set)
 static void		change_color(t_fractal *set, int key)
 {
 	if (key == RED)
-		set->red = set->red == 250 ? 0 : set->red + 5;
+		set->red = set->red + 5;
 	if (key == GREEN)
-		set->green = set->green == 250 ? 0 : set->green + 5;
+		set->green = set->green + 5;
 	if (key == BLUE)
-		set->blue = set->blue == 250 ? 0 : set->blue + 5;
-//	ft_putstr("red: ");
-//	ft_putnbr(set->red);
-//	ft_putstr(" green: ");
-//	ft_putnbr(set->green);
-//	ft_putstr(" blue: ");
-//	ft_putnbr(set->blue);
-//	ft_putendl("");
+		set->blue = set->blue + 5;
+	ft_putstr("red: ");
+	ft_putnbr(set->red);
+	ft_putstr(" green: ");
+	ft_putnbr(set->green);
+	ft_putstr(" blue: ");
+	ft_putnbr(set->blue);
+	ft_putendl("");
 }
 
 static void		change_maximum(t_fractal *set, int key)
 {
-	if(key == ARROW_UP)
+	if (key == ARROW_UP)
 		set->maximum += 10;
 	else if (key == ARROW_DOWN)
 		set->maximum -= 10;
@@ -74,31 +74,29 @@ static void		change_position(t_fractal *set, int key)
 	}
 }
 
-int			hook_keydown(int key, t_fractal *set)
+int				hook_keydown(int key, t_fractal *set)
 {
-	if (key > 0)
+	change_color(set, key);
+	change_maximum(set, key);
+	change_position(set, key);
+	if (key == ESC)
+		exit(123);
+	if (key == Q)
+		set->stop = (set->stop == 0) ? 1 : 0;
+	if (key == MINUS || key == PLUS)
+		if (key == PLUS)
+			set->zoom /= 1.2;
+		else if (set->zoom >= 1.2)
+			set->zoom *= 1.2;
+	if (key == MAC_RANDOM)
 	{
-		change_color(set, key);
-		change_maximum(set, key);
-		change_position(set, key);
-		if (key == ESC)
-			exit(123);
-		if (key == Q)
-			set->stop = (set->stop == 0) ? 1 : 0;
-		if (key == MINUS || key == PLUS)
-			if (key == PLUS)
-				set->zoom /= 1.2;
-			else if (set->zoom >= 1.2)
-				set->zoom *= 1.2;
-		if (key == MAC_RANDOM) {
-			set->x_move = 0;
-			set->zoom = 1;
-			set->y_move = 0;
-			set->red = 42;
-			set->green = 42 + 42;
-			set->blue = 42 + 42;
-		}
-		update(set);
+		set->x_move = 0;
+		set->zoom = 1;
+		set->y_move = 0;
+		set->red = 42;
+		set->green = 42 + 42;
+		set->blue = 42 + 42;
 	}
+	update(set);
 	return (0);
 }

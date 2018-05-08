@@ -12,7 +12,7 @@ set(CMAKE_C_STANDARD 99)
     link_directories(${PROJECT_SOURCE_DIR}/libft)
     include_directories(${PROJECT_SOURCE_DIR}/libft)
 
-set(SOURCE_FILES src/julia_set.c includes/fractol.h src/main.c src/window.c src/image.c includes/keyx.h src/mandelbrot_set.c src/hook.c src/celtic_set.c src/threads.c)
+set(SOURCE_FILES src/julia_set.c includes/fractol.h src/main.c src/mlx_image.c includes/keyx.h src/mandelbrot_set.c src/hook.c src/celtic_set.c src/threads.c src/fractal_tools.c src/tricorn_set.c src/perpendicular_mandelbrot_set.c src/perpen_celtic_set.c src/heart_set.c src/four_mandelbrot_set.c)
 
 add_executable(fractol_C ${SOURCE_FILES})
 

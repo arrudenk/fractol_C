@@ -12,9 +12,21 @@
 
 #include "../includes/fractol.h"
 
+t_mlx	*init_mlx(void)
+{
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx->mlx, W, H, "F.R.A.C.T.O.L");
+	mlx->img = new_image(mlx);
+	return (mlx);
+}
+
 void	pixel_to_image(t_fractal *set)
 {
 	int j;
+
 	j = 4 * ((int)set->y * W + (int)set->x);
 	set->mlx->img->pic[j] = (char)set->blue * (char)set->thing;
 	set->mlx->img->pic[j + 1] = (char)set->green * (char)set->thing;
@@ -27,7 +39,8 @@ t_image	*new_image(t_mlx *mlx)
 
 	img = (t_image *)malloc(sizeof(t_image));
 	img->image = mlx_new_image(mlx, W, H);
-	img->pic = mlx_get_data_addr(img->image, &img->bpp, &img->stride, &img->endian);
+	img->pic = mlx_get_data_addr(img->image
+			, &img->bpp, &img->stride, &img->endian);
 	img->bpp /= 8;
 	return (img);
 }

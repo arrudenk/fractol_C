@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef FRACTOL_C_KEYX_H
-# define FRACTOL_C_KEYX_H
+#ifndef KEYX_H
+# define KEYX_H
 # define UP 126
 # define DOWN 125
 # define RIGHT 124
@@ -24,10 +23,7 @@
 # define RED 15
 # define GREEN 5
 # define BLUE 11
-# define E 14
 # define ESC 53
 # define ARROW_UP 115
 # define ARROW_DOWN 119
-
-
 #endif

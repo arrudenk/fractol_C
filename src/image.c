@@ -12,57 +12,27 @@
 
 #include "../includes/fractol.h"
 
-void	image_set_pixel(t_mlx *mlx, int x, int y, int c)
-{
-	*(int *)(mlx->img->ptr + ((x + y * W) * mlx->img->bpp)) = c;
-}
-
-void	clear_image(t_mlx *mlx)
-{
-	int		i;
-
-	i = W * H * mlx->img->bpp;
-	while (--i)
-		*(mlx->img->ptr + i) = 0;
-	*(mlx->img->ptr) = 0;
-}
-
 void	pixel_to_image(t_fractal *set)
 {
 	int j;
 	j = 4 * ((int)set->y * W + (int)set->x);
-	set->mlx->img->ptr[j] = set->blue * set->thing;
-	set->mlx->img->ptr[j + 1] = set->green * set->thing;
-	set->mlx->img->ptr[j + 2] = set->red * set->thing;
+	set->mlx->img->pic[j] = (char)set->blue * (char)set->thing;
+	set->mlx->img->pic[j + 1] = (char)set->green * (char)set->thing;
+	set->mlx->img->pic[j + 2] = (char)set->red * (char)set->thing;
 }
 
 t_image	*new_image(t_mlx *mlx)
 {
-	t_image	*img;
+	t_image *img;
 
-	if (!(img = (t_image *)malloc(sizeof(t_image))))
-	{
-		ft_putendl("error");
-		exit(1);
-	}
-	if (!(img->image = mlx_new_image(mlx->mlx, W, H)))
-	{
-		ft_putendl("error");
-		exit(1);
-	}
-	img->ptr = mlx_get_data_addr(img->image, &(img->bpp), &(img->stride)
-			, &(img->endian));
-	img->bpp = (img->bpp) >> 3;
+	img = (t_image *)malloc(sizeof(t_image));
+	img->image = mlx_new_image(mlx, W, H);
+	img->pic = mlx_get_data_addr(img->image, &img->bpp, &img->stride, &img->endian);
+	img->bpp /= 8;
 	return (img);
 }
 
-t_image	*create_new_im(void *mlx)
+void	clear_image(t_mlx *mlx)
 {
-	t_image *im;
-
-	im = (t_image *)malloc(sizeof(t_image));
-	im->image = mlx_new_image(mlx, W, H);
-	im->ptr = mlx_get_data_addr(im->image, &im->bpp, &im->stride, &im->endian);
-	im->bpp /= 8;
-	return (im);
+	ft_bzero(mlx->img->pic, W * H * mlx->img->bpp);
 }

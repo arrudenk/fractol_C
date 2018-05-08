@@ -17,24 +17,26 @@
 # include "libft.h"
 # include "math.h"
 # include "OpenCL/opencl.h"
+# include <pthread.h>
 
-# define W 500
-# define H 500
+# define W 800
+# define H 800
+# define THREADS 4
 
 typedef struct	s_image
 {
 	void		*image;
-	char		*ptr;
-	int		bpp;
-	int		stride;
-	int		endian;
+	char		*pic;
+	int			bpp;
+	int			stride;
+	int			endian;
 }				t_image;
 
 typedef	struct	s_mlx
 {
 	void		*mlx;
 	void		*win;
-	t_image	*img;
+	t_image		*img;
 }				t_mlx;
 
 typedef struct	s_fractal
@@ -54,6 +56,8 @@ typedef struct	s_fractal
 	int		red;
 	int		green;
 	int		blue;
+	int		start;
+	int		end;
 }				t_fractal;
 
 int				exit_x(void);
@@ -70,11 +74,13 @@ void			julia(t_fractal *set);
 void			celtic(t_fractal *set);
 void			do_fractal(t_fractal *set);
 void			update(t_fractal *set);
+void			mandelbrot_set(t_fractal *set);
 
 int				hook_keydown(int key, t_fractal *set);
 /*>>BONUS<<*/
 int				mouse_func(int button, int x, int y, t_fractal *set);
 void			zoomin(t_fractal *set, int x, int y);
-void			change_color(t_fractal *set, int key);
+void			pthread(t_fractal *set);
+void			juli_do_the_thing(t_fractal *set);
 
 #endif

@@ -34,28 +34,31 @@ static void		mandelbrot_part2(t_fractal *set)
 		pixel_to_image(set);
 }
 
-static void		mandelbrot_set(t_fractal *set)
+void		mandelbrot_set(t_fractal *set)
 {
-	set->y = 0;
-	while (set->y < H)
+	set->y = set->start;
+	while (set->y < set->end)
 	{
 		set->x = 0;
 		set->imaginary = (set->y - H / 2) / (0.25 * set->zoom * H) + set->y_move;
-		while (set->x < W)
+		while (set->x < set->end)
 		{
 			mandelbrot_part2(set);
 			set->x++;
 		}
 		set->y++;
 	}
+	pthread_exit(0);
 }
 
 void		mandelbrot(t_fractal *set)
 {
-	mandelbrot_set(set);
+//	mandelbrot_set(set);
+	pthread(set);
 	mlx_hook(set->mlx->win, 2, 5, hook_keydown, set);
 	mlx_mouse_hook(set->mlx->win, mouse_func, set);
 	mlx_hook(set->mlx->win, 17, 1L << 17, exit_x, set->mlx->mlx);
 	mlx_put_image_to_window(set->mlx->mlx, set->mlx->win, set->mlx->img->image
 			, 0, 0);
+
 }

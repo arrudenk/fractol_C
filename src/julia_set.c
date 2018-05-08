@@ -14,7 +14,6 @@
 
 static int		mouse_julia(int x, int y, t_fractal *set)
 {
-	clear_image(set->mlx);
 	if (set->stop == 0)
 	{
 		set->real =
@@ -24,8 +23,8 @@ static int		mouse_julia(int x, int y, t_fractal *set)
 		set->x = x;
 		set->x = y;
 	}
-	do_fractal(set);
-	mlx_put_image_to_window(set->mlx, set->mlx->win, set->mlx->img, 0, 0);
+	update(set);
+//	mlx_put_image_to_window(set->mlx, set->mlx->win, set->mlx->img, 0, 0);
 	return (0);
 }
 
@@ -49,13 +48,13 @@ static void		julia_pixel(t_fractal *set)
 		pixel_to_image(set);
 }
 
-static void		juli_do_the_thing(t_fractal *set)
+void		juli_do_the_thing(t_fractal *set)
 {
-	set->y = 0;
-	while (set->y < H)
+	set->y = set->start;
+	while (set->y < set->end)
 	{
 		set->x = 0;
-		while (set->x < W)
+		while (set->x < set->end)
 		{
 			julia_pixel(set);
 			set->x++;
@@ -66,11 +65,10 @@ static void		juli_do_the_thing(t_fractal *set)
 
 void		julia(t_fractal *set)
 {
-	juli_do_the_thing(set);
+	pthread(set);
 	mlx_hook(set->mlx->win, 2, 5, hook_keydown, set);
 	mlx_hook(set->mlx->win, 6, 1L < 6, mouse_julia, set);
 	mlx_mouse_hook(set->mlx->win, mouse_func, set);
 	mlx_put_image_to_window(set->mlx->mlx, set->mlx->win, set->mlx->img->image
 			, 0, 0);
-
 }

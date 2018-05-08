@@ -26,6 +26,8 @@
 # define BLUE 11
 # define E 14
 # define ESC 53
+# define ARROW_UP 115
+# define ARROW_DOWN 119
 
 
 #endif

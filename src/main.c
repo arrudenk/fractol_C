@@ -23,25 +23,7 @@ void		update(t_fractal *set)
 	do_fractal(set);
 }
 
-
-t_fractal	*fractal_info(void)
-{
-	t_fractal	*set;
-
-	set = ft_memalloc(sizeof(t_fractal));
-	set->mlx = init_mlx();
-	set->thing = 0;
-	set->maximum = 200;
-	set->zoom = 1;
-	set->x_move = 0;
-	set->y_move = 0;
-	set->red = 0;
-	set->green = 0;
-	set->blue = 0;
-	return (set);
-}
-
-void	do_fractal(t_fractal *set)
+void		do_fractal(t_fractal *set)
 {
 	if (set->fractal == 1)
 		mandelbrot(set);
@@ -78,14 +60,35 @@ void		select_fractal(const char *str, t_fractal *fractal)
 		error(-1);
 }
 
+t_fractal	*fractal_info(void)
+{
+	t_fractal	*set;
+
+	set = ft_memalloc(sizeof(t_fractal));
+	set->mlx = init_mlx();
+	set->thing = 0;
+	set->maximum = 30;
+	set->zoom = 1;
+	set->x_move = 0;
+	set->y_move = 0;
+	set->red = 42;
+	set->green = 42 + 42;
+	set->blue = 42 + 42 + 42;
+	set->start = 0;
+	set->end = 0;
+	return (set);
+}
+
 int		main(int argc, char **argv)
 {
 	t_fractal *fractal;
 
 	fractal = fractal_info();
+
 	if (argc != 2)
 		error(-1);
 	select_fractal(argv[1], fractal);
+//	pthread(fractal);
 	do_fractal(fractal);
 	mlx_hook(fractal->mlx->win, 17, 1L << 17, exit_x, fractal->mlx->mlx);
 	mlx_hook(fractal->mlx->win, 2, 5, hook_keydown, fractal);

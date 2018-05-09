@@ -35,7 +35,7 @@ void		four_mandelbrot_part2(t_fractal *set)
 		pixel_to_image(set);
 }
 
-void		four_mandelbrot_set(t_fractal *set)
+void		four_mandel_set(t_fractal *set)
 {
 	set->y = set->start;
 	while (set->y < set->end)

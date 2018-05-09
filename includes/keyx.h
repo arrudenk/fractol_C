@@ -18,12 +18,12 @@
 # define LEFT 123
 # define PLUS 78
 # define MINUS 69
-# define MAC_RANDOM 71
+# define MAC_RANDOM 81
 # define Q 12
 # define RED 15
 # define GREEN 5
 # define BLUE 11
 # define ESC 53
-# define ARROW_UP 115
-# define ARROW_DOWN 119
+# define ARROW_UP 116
+# define ARROW_DOWN 121
 #endif

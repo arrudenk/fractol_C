@@ -39,21 +39,14 @@ static void		change_color(t_fractal *set, int key)
 		set->green = set->green + 5;
 	if (key == BLUE)
 		set->blue = set->blue + 5;
-	ft_putstr("red: ");
-	ft_putnbr(set->red);
-	ft_putstr(" green: ");
-	ft_putnbr(set->green);
-	ft_putstr(" blue: ");
-	ft_putnbr(set->blue);
-	ft_putendl("");
 }
 
 static void		change_maximum(t_fractal *set, int key)
 {
 	if (key == ARROW_UP)
-		set->maximum += 10;
+		set->maximum += 1;
 	else if (key == ARROW_DOWN)
-		set->maximum -= 10;
+		set->maximum -= 1;
 }
 
 static void		change_position(t_fractal *set, int key)
@@ -84,18 +77,20 @@ int				hook_keydown(int key, t_fractal *set)
 	if (key == Q)
 		set->stop = (set->stop == 0) ? 1 : 0;
 	if (key == MINUS || key == PLUS)
+	{
 		if (key == PLUS)
 			set->zoom /= 1.2;
 		else if (set->zoom >= 1.2)
 			set->zoom *= 1.2;
+	}
 	if (key == MAC_RANDOM)
 	{
 		set->x_move = 0;
 		set->zoom = 1;
 		set->y_move = 0;
-		set->red = 42;
-		set->green = 42 + 42;
-		set->blue = 42 + 42;
+		set->red = 10;
+		set->green = 10;
+		set->blue = 10;
 	}
 	update(set);
 	return (0);

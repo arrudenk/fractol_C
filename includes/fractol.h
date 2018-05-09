@@ -12,8 +12,8 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define W 800
-# define H 800
+# define W 1200
+# define H 1200
 # define THREADS 16
 
 # include "mlx.h"
@@ -84,10 +84,10 @@ void			mandelbrot_set(t_fractal *set);
 void			tricorn_set(t_fractal *set);
 void			celtic_set(t_fractal *set);
 void			juli_do_set(t_fractal *set);
-void			perpen_mandelbrot_set(t_fractal *set);
+void			perpen_mandel_set(t_fractal *set);
 void			perpen_celtic_set(t_fractal *set);
 void			heart_set(t_fractal *set);
-void			four_mandelbrot_set(t_fractal *set);
+void			four_mandel_set(t_fractal *set);
 
 int				hook_keydown(int key, t_fractal *set);
 int				mouse_func(int button, int x, int y, t_fractal *set);

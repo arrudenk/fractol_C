@@ -20,18 +20,31 @@ int		exit_x(void)
 void	error(int error)
 {
 	if (error == -1)
-		ft_putendl("Bad argument. Available (-j (<-Julia set)"
-						", -m (<-Mandelbrot), -c (<-Celtic))");
+		ft_putendl("ERROR->Bad argument. Available "
+						"\n\t1) -j\t(<-Julia set)"
+						"\n\t2) -m\t(<-Mandelbrot)"
+						"\n\t3) -c\t(<-Celtic)"
+						"\n\t4) -t\t(<-Tricorn)"
+						"\n\t5) -pm\t(<-perpendicular Mandelbrot)"
+						"\n\t6) -pc\t(<-perpendicular Celtic)"
+						"\n\t7) -h\t(<-Heart)"
+						"\n\t8) -4m\t(<-Mandelbrot 4th Order)");
 	exit(error);
 }
 
 int		main(int argc, char **argv)
 {
-	t_fractal *fractal;
+	t_fractal	*fractal;
+	char		*temp;
 
-	fractal = fractal_info();
-	if (argc != 2)
+	if (argc < 2)
 		error(-1);
+	if (argc > 2)
+	{
+		temp = ft_strjoin("./fractol ", ft_strjoin(argv[2], " &"));
+		system(temp);
+	}
+	fractal = fractal_info();
 	select_fractal(argv[1], fractal);
 	do_fractal(fractal);
 	mlx_hook(fractal->mlx->win, 17, 1L << 17, exit_x, fractal->mlx->mlx);

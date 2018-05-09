@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-project(fractol_C)
+project(fractol)
 
 set(CMAKE_C_STANDARD 99)
 

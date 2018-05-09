@@ -54,7 +54,7 @@ void		select_fractal(const char *str, t_fractal *fractal)
 			fractal->fractal = (5);
 		else if (ft_strequ("-pc", str))
 			fractal->fractal = (6);
-		else if (str[1] == '-h')
+		else if (ft_strequ("-h", str))
 			fractal->fractal = (7);
 		else if (ft_strequ("-4m", str))
 			fractal->fractal = (8);
@@ -76,10 +76,12 @@ t_fractal	*fractal_info(void)
 	set->zoom = 1;
 	set->x_move = 0;
 	set->y_move = 0;
-	set->red = 0;
-	set->green = 0;
-	set->blue = 0;
+	set->red = 10;
+	set->green = 10;
+	set->blue = 10;
 	set->start = 0;
 	set->end = 0;
+	ft_putendl("\n\tKeys:\n\tcolor: R G B;\n\titerations: ↑ UP | ↓ DOWN;"
+					   "\n\tReset: =\n\tJulia mouse stop: Q");
 	return (set);
 }

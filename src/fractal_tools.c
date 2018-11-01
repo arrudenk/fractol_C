@@ -81,7 +81,7 @@ t_fractal	*fractal_info(void)
 	set->blue = 10;
 	set->start = 0;
 	set->end = 0;
-	ft_putendl("\n\tKeys:\n\tcolor: R G B;\n\titerations: ↑ UP | ↓ DOWN;"
-					"\n\tReset: =\n\tJulia mouse stop: Q");
+	ft_putendl("\n\tKeys:\n\tcolor: R G B;\n\titerations: > increase | < decrease;"
+					"\n\tReset: Enter\n\tJulia mouse stop: Q");
 	return (set);
 }

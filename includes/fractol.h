@@ -12,9 +12,9 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define W 1200
-# define H 1200
-# define THREADS 16
+# define W 720
+# define H 720
+# define THREADS 8
 
 # include "mlx.h"
 # include "libft.h"
